@@ -27,15 +27,11 @@
 
 <script>
 import Chart from "chart.js";
-import eventBus from "../eventBus";
 export default {
-  props: {
-    moodsChartList: Array
-  },
-
   data() {
     return {
-      displayedFor: new Date()
+      displayedFor: new Date(),
+      dotColors: []
     };
   },
 
@@ -78,13 +74,40 @@ export default {
       this.displayedFor.setMonth(this.displayedFor.getMonth() + by);
       this.moodChart.options.scales.xAxes[0].time.min = this.firstDay;
       this.moodChart.options.scales.xAxes[0].time.max = this.lastDay;
+      this.changeDotColors();
       this.$forceUpdate();
       this.moodChart.update();
+    },
+
+    changeDotColors() {
+      this.$store.state.moodsChartList.forEach((el, index) => {
+        switch (el.y) {
+          case 5:
+            this.dotColors[index] = "rgb(0, 169, 79)";
+            break;
+          case 4:
+            this.dotColors[index] = "rgb(0, 255, 25)";
+            break;
+          case 3:
+            this.dotColors[index] = "rgb(229, 255, 29)";
+            break;
+          case 2:
+            this.dotColors[index] = "rgb(218, 105, 39)";
+            break;
+          case 1:
+            this.dotColors[index] = "rgb(255, 0, 0)";
+            break;
+          default:
+            this.dotColors[index] = "rgb(0, 0, 0)";
+            break;
+        }
+      });
     }
   },
 
   mounted() {
     const ctx = document.getElementById("mood-chart");
+    this.changeDotColors();
     this.moodChart = new Chart(ctx, {
       type: "line",
       data: {
@@ -94,24 +117,22 @@ export default {
             lineTension: 0,
             responsive: true,
             maintainAspectRatio: true,
-            data: this.moodsChartList,
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)"
-            ],
+            data: this.$store.state.moodsChartList,
+            borderColor: "rgba(0, 0, 0, 1)",
             borderWidth: 1,
-            pointBackgroundColor: "rgba(0, 0, 0, 1)",
-            pointBorderColor: "rgba(0, 0, 0, 1)"
+            pointBackgroundColor: this.dotColors,
+            pointRadius: 5,
+            pointHoverRadius: 10
           }
         ]
       },
       options: {
         legend: {
           display: false
+        },
+
+        tooltips: {
+          enabled: false
         },
 
         scales: {
@@ -138,12 +159,6 @@ export default {
         }
       }
     });
-
-    /*  eventBus.$on("moodAdded", el => {
-      console.log(this.moodsChartList);
-      this.moodsChartList.push(el);
-      moodChart.update();
-    }); */
   }
 };
 </script>

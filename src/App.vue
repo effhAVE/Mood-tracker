@@ -6,24 +6,17 @@
       |
       <router-link to="/list">List</router-link>
     </div>
-    <router-view :moodsChartList="moodsChartList" />
+    <router-view />
   </div>
 </template>
 
 <script>
-import eventBus from "./eventBus";
-
 export default {
   data() {
-    return {
-      moodsChartList: []
-    };
+    return {};
   },
-
-  mounted() {
-    eventBus.$on("moodAdded", el => {
-      this.moodsChartList.push(el);
-    });
+  created() {
+    this.$store.dispatch("getStoredMoods");
   }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="container is-flex-column">
     <h1 class="title">Hello! How are you?</h1>
-    <MoodsList @moodAdded="" />
+    <MoodsList />
     <p class="subtitle">
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa alias
       quidem nam. Ipsam repellat quis exercitationem tempora, magnam eum sequi
@@ -12,7 +12,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import MoodsList from "@/components/MoodsList.vue";
 
 export default {

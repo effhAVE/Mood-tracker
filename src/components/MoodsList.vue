@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import eventBus from "../eventBus";
 export default {
   data() {
     return {
@@ -53,10 +52,12 @@ export default {
     onMoodSelected(moodType) {
       const moodData = {
         y: moodType.value,
-        x: new Date()
+        x: new Date(),
+        img: moodType.img
       };
 
-      eventBus.$emit("moodAdded", moodData);
+      this.$store.dispatch("addMood", moodData);
+      this.$router.push("chart");
     }
   }
 };
