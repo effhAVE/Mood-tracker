@@ -5,6 +5,7 @@ import store from './store'
 import './../node_modules/bulma/css/bulma.css'
 
 Vue.config.productionTip = false
+Vue.use(require('vue-moment'));
 
 new Vue({
   router,

@@ -17,6 +17,18 @@ export default {
   },
   created() {
     this.$store.dispatch("getStoredMoods");
+    /* this.$store.dispatch("addMood", {
+      y: 3,
+      x: this.$moment("2019-09-01"),
+      timestamp: this.$moment("2019-09-01"),
+      img: `${process.env.BASE_URL}img/neutral.png`
+    });
+    this.$store.dispatch("addMood", {
+      y: 4,
+      x: this.$moment("2019-09-02"),
+      timestamp: this.$moment("2019-09-02"),
+      img: `${process.env.BASE_URL}img/smile.png`
+    }); */
   }
 };
 </script>

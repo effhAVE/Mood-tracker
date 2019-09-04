@@ -9,12 +9,12 @@
     </thead>
     <tbody>
       <tr
-        v-for="(entry, index) in $store.state.moodsChartList.slice().reverse()"
+        v-for="(entry, index) in $store.state.moodsList.slice().reverse()"
         :key="index"
       >
         <th>{{ index }}</th>
         <td><img class="table-image" :src="entry.img" /></td>
-        <td>{{ entry.x }}</td>
+        <td>{{ entry.timestamp | moment("from") }}</td>
       </tr>
     </tbody>
   </table>

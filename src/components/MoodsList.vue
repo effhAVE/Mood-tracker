@@ -52,7 +52,8 @@ export default {
     onMoodSelected(moodType) {
       const moodData = {
         y: moodType.value,
-        x: new Date(),
+        x: this.$moment().hour(12),
+        timestamp: this.$moment(),
         img: moodType.img
       };
 

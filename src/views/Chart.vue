@@ -30,7 +30,7 @@ import Chart from "chart.js";
 export default {
   data() {
     return {
-      displayedFor: new Date(),
+      displayedFor: this.$moment(),
       dotColors: []
     };
   },
@@ -39,39 +39,28 @@ export default {
     firstDay: {
       cache: false,
       get() {
-        return new Date(
-          this.displayedFor.getFullYear(),
-          this.displayedFor.getMonth(),
-          1
-        );
+        return this.displayedFor.startOf("month").toDate();
       }
     },
 
     lastDay: {
       cache: false,
       get() {
-        return new Date(
-          this.displayedFor.getFullYear(),
-          this.displayedFor.getMonth() + 1,
-          0
-        );
+        return this.displayedFor.endOf("month").toDate();
       }
     },
 
     displayedDate: {
       cache: false,
       get() {
-        return this.displayedFor.toLocaleDateString("en-GB", {
-          month: "long",
-          year: "numeric"
-        });
+        return this.displayedFor.format("MMMM YYYY");
       }
     }
   },
 
   methods: {
     changeMonth(by) {
-      this.displayedFor.setMonth(this.displayedFor.getMonth() + by);
+      this.displayedFor.add(by, "months");
       this.moodChart.options.scales.xAxes[0].time.min = this.firstDay;
       this.moodChart.options.scales.xAxes[0].time.max = this.lastDay;
       this.changeDotColors();
@@ -80,7 +69,7 @@ export default {
     },
 
     changeDotColors() {
-      this.$store.state.moodsChartList.forEach((el, index) => {
+      this.$store.state.moodsAverages.forEach((el, index) => {
         switch (el.y) {
           case 5:
             this.dotColors[index] = "rgb(0, 169, 79)";
@@ -117,7 +106,7 @@ export default {
             lineTension: 0,
             responsive: true,
             maintainAspectRatio: true,
-            data: this.$store.state.moodsChartList,
+            data: this.$store.state.moodsAverages,
             borderColor: "rgba(0, 0, 0, 1)",
             borderWidth: 1,
             pointBackgroundColor: this.dotColors,
