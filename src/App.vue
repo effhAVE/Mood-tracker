@@ -40,6 +40,10 @@ body {
   height: 100%;
 }
 
+html {
+  overflow-y: auto !important;
+}
+
 #app {
   display: flex;
   flex-direction: column;
