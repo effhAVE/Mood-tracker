@@ -7,11 +7,17 @@
       <router-link to="/list">List</router-link>
     </div>
     <router-view />
+    <SelectedOverlay v-if="$store.state.showSelectedOverlay" />
   </div>
 </template>
 
 <script>
+import SelectedOverlay from "@/components/SelectedOverlay.vue";
+
 export default {
+  components: {
+    SelectedOverlay
+  },
   data() {
     return {};
   },

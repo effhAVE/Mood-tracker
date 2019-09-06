@@ -71,27 +71,28 @@ export default {
     },
 
     changeDotColors() {
-      this.$store.state.moodsAverages.forEach((el, index) => {
-        switch (el.y) {
-          case 5:
-            this.dotColors[index] = "rgb(0, 169, 79)";
-            break;
-          case 4:
-            this.dotColors[index] = "rgb(0, 255, 25)";
-            break;
-          case 3:
-            this.dotColors[index] = "rgb(229, 255, 29)";
-            break;
-          case 2:
-            this.dotColors[index] = "rgb(218, 105, 39)";
-            break;
-          case 1:
-            this.dotColors[index] = "rgb(255, 0, 0)";
-            break;
-          default:
-            this.dotColors[index] = "rgb(0, 0, 0)";
-            break;
+      this.$store.state.moodsAverages.forEach(({ y }, index) => {
+        let colour = "rgb(0, 0, 0)";
+        if (y === 5) {
+          colour = "rgb(0, 169, 79)";
+        } else if (y >= 4.5) {
+          colour = "rgb(0, 193, 16)";
+        } else if (y >= 4) {
+          colour = "rgb(0, 255, 25)";
+        } else if (y >= 3.5) {
+          colour = "rgb(151, 255, 25)";
+        } else if (y >= 3) {
+          colour = "rgb(229, 255, 29)";
+        } else if (y >= 2.5) {
+          colour = "rgb(255, 197, 25)";
+        } else if (y >= 2) {
+          colour = "rgb(255, 122, 40)";
+        } else if (y >= 1.5) {
+          colour = "rgb(255, 80, 0)";
+        } else if (y === 1) {
+          colour = "rgb(255, 0, 0)";
         }
+        this.dotColors[index] = colour;
       });
     }
   },

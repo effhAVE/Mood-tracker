@@ -7,7 +7,8 @@ Vue.use(require('vue-moment'));
 const store = new Vuex.Store({
   state: {
     moodsList: [],
-    moodsAverages: []
+    moodsAverages: [],
+    showSelectedOverlay: false
   },
 
   mutations: {
@@ -20,7 +21,8 @@ const store = new Vuex.Store({
     setMoodsLists (state, arrays) {
       state.moodsAverages = JSON.parse(arrays.avg);
       state.moodsList = JSON.parse(arrays.all);
-    }
+    },
+    toggleOverlay: state => state.showSelectedOverlay = !state.showSelectedOverlay,
   },
 
   getters: {
@@ -28,7 +30,8 @@ const store = new Vuex.Store({
     dailyAverage: (state, getters) => {
       const todaysMoods = getters.todaysMoods;
       return todaysMoods.reduce((total, current) => total += current.y, 0) / (todaysMoods.length || 1);
-    }
+    },
+    lastSelected: state => state.moodsList[state.moodsList.length - 1]
   },
 
   actions: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="columns">
+  <div class="columns moods-columns">
     <div class="column" v-for="(mood, index) in moods" :key="index">
       <figure class="image is-128x128">
         <img
@@ -54,11 +54,13 @@ export default {
         y: moodType.value,
         x: this.$moment().hour(12),
         timestamp: this.$moment(),
-        img: moodType.img
+        img: moodType.img,
+        comment: ""
       };
 
       this.$store.dispatch("addMood", moodData);
       this.$router.push("chart");
+      this.$store.commit("toggleOverlay");
     }
   }
 };
@@ -72,6 +74,13 @@ export default {
   transition: filter 0.3s;
   &:hover {
     filter: grayscale(0);
+  }
+}
+
+.image.is-128x128 {
+  @media (max-width: 768px) {
+    width: 64px;
+    height: 64px;
   }
 }
 </style>

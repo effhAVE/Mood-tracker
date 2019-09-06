@@ -2,11 +2,15 @@
   <div class="container is-flex-column">
     <h1 class="title">Hello! How are you?</h1>
     <MoodsList />
-    <p class="subtitle">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa alias
-      quidem nam. Ipsam repellat quis exercitationem tempora, magnam eum sequi
-      ut, ad veritatis velit consectetur aliquam dicta obcaecati? Voluptatum,
-      asperiores.
+    <p class="subtitle is-hidden-mobile">
+      The application helps you track your state of being. Just simply select
+      the mood icon you can relate with. Don't overthink it. Just feel. <br />
+      It was inspired by
+      <a
+        href="https://play.google.com/store/apps/details?id=dk.howareyou.aps&hl=en"
+        target="_blank"
+        >this awesome mobile app</a
+      >.
     </p>
   </div>
 </template>
@@ -30,8 +34,22 @@ export default {
 }
 
 .container {
-  padding: 3em 0;
+  padding-bottom: 3em;
   flex-grow: 5;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+    display: block;
+  }
+
+  .moods-columns {
+    display: flex;
+    @media (max-width: 480px) {
+      display: block;
+    }
+  }
 }
 </style>
 
