@@ -65,7 +65,7 @@ export default {
     },
     addMoodComment() {
       this.mood.comment = this.comment;
-      this.toggle;
+      this.toggle();
     }
   }
 };
